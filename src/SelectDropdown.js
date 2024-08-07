@@ -14,11 +14,13 @@ const SelectDropdown = (
   {
     data /* array */,
     onSelect /* function  */,
+    onSelectChange,
     defaultButtonText /* String */,
     buttonTextAfterSelection /* function or string */,
     rowTextForSelection /* function */,
     defaultValue /* any */,
     defaultValueByIndex /* integer */,
+    multipleSelectionText ,
     disabled /* boolean */,
     disableAutoScroll /* boolean */,
     disabledIndexs /* array of disabled Row index */,
@@ -130,6 +132,7 @@ const SelectDropdown = (
   };
   const onSelectItem = (item, index) => {
     if (multipleSelect) {
+      onSelectChange && onSelectChange(item, index);
       selectItem(index);
       toggleSeletAll(false);
       return;
@@ -243,6 +246,7 @@ const SelectDropdown = (
       )
     );
   };
+ 
   ///////////////////////////////////////////////////////
   return (
     <TouchableOpacity
@@ -269,8 +273,8 @@ const SelectDropdown = (
             allowFontScaling={false}
             style={{...styles.dropdownButtonText, ...buttonTextStyle}}>
             {multipleSelect
-              ? selectedItem.length > 0
-                ? buttonTextAfterSelection
+              ? multipleSelectionText
+                ? multipleSelectionText 
                 : defaultButtonText
               : isExist(selectedItem)
               ? buttonTextAfterSelection
