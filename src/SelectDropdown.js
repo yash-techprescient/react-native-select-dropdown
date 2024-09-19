@@ -119,6 +119,7 @@ const SelectDropdown = (
     setSearchTxt('');
     onBlur && onBlur();
   };
+
   const onLayout = () => {
     if (disableAutoScroll) {
       return;
@@ -240,7 +241,18 @@ const SelectDropdown = (
                   List Empty
                 </Text>
               }
+            
             />
+            {
+              multipleSelect ?
+              <View style={{ margin: 12, flexDirection: "row" }}>
+              <TouchableOpacity onPress={() => closeDropdown()} style={{ marginLeft: "auto" }}>
+                <Text style={{ color: "#0095FF", fontWeight: "600" }}>Done</Text>
+              </TouchableOpacity>
+            </View>    
+              :null
+            }
+        
           </DropdownWindow>
         </DropdownModal>
       )
